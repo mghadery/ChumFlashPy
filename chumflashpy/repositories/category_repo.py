@@ -3,12 +3,20 @@ class CategoryRepo:
         self.categories = {}
 
     def add(self, category):
+        # check name existence
+        e = {k: v for (k, v) in self.categories.items() if v.name == category.name}
+        if e:
+            raise ValueError()
+
         index = max(self.categories.keys(), default=0) + 1
         category.id = index
         self.categories[index] = category
 
     def get_by_id(self, id):
-        return self.categories[id]
+        try:
+            return self.categories[id]
+        except KeyError:
+            return None
 
     def get_list(self):
         return list(self.categories.values())
