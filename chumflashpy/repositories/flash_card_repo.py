@@ -31,5 +31,8 @@ class FlashCardRepo:
         if len(filtered) == 0:
             return None
         keys = list(filtered.keys())
-        key = keys[random.randint(0, len(keys) - 1)]
+
+        # key = keys[random.randint(0, len(keys) - 1)]
+        key = random.choice(keys)
+
         return self.flash_cards[key]
