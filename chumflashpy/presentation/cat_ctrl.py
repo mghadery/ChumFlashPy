@@ -4,7 +4,7 @@ from models.category import Category
 
 def add_cat(categories: CategoryRepo):
     name = input("Give me the category name:")
-    cat = Category(id=1, name=name)
+    cat = Category(name=name)
     try:
         r = categories.add(cat)
     except ValueError:
