@@ -30,7 +30,9 @@ def add_flash(categories: CategoryRepo, flash_cards: FlashCardRepo):
             break
     tag = ",".join(tag_list)
 
-    flash_card = FlashCard(1, front, back, tag, cat_id, None, now, "me")
+    flash_card = FlashCard(
+        front=front, back=back, tags=tag, category_id=cat_id, username="me"
+    )
     flash_cards.add(flash_card)
 
 
