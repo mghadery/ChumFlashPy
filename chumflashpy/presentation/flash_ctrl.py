@@ -2,6 +2,7 @@ from repositories.category_repo import CategoryRepo
 from repositories.flash_card_repo import FlashCardRepo
 from models.flash_card import FlashCard
 import datetime
+from langdetect import detect_langs
 
 
 def add_flash(categories: CategoryRepo, flash_cards: FlashCardRepo):
@@ -29,9 +30,38 @@ def add_flash(categories: CategoryRepo, flash_cards: FlashCardRepo):
         except EOFError:
             break
     tag = ",".join(tag_list)
+    front_langs = detect_langs(front)
+    back_langs = detect_langs(back)
+
+    if len(front_langs) == 1:
+        front_lang = front_langs[0].lang
+        x = input(
+            f"Detected front lang is {front_lang}. If not correct, enter correct value otherwise press enter: "
+        )
+        if x:
+            front_lang = x
+    else:
+        front_lang = input("front language code: ").strip()
+
+    if len(back_langs) == 1:
+        back_lang = back_langs[0].lang
+        x = input(
+            f"Detected back lang is {back_lang}. If not correct, enter correct value otherwise press enter: "
+        )
+        if x:
+            back_lang = x
+    else:
+        back_lang = input("front language code: ").strip()
+    # print(front_lang, back_lang)
 
     flash_card = FlashCard(
-        front=front, back=back, tags=tag, category_id=cat_id, username="me"
+        front=front,
+        back=back,
+        tags=tag,
+        category_id=cat_id,
+        username="me",
+        front_lang=front_lang,
+        back_lang=back_lang,
     )
     flash_cards.add(flash_card)
 

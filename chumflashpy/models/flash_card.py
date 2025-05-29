@@ -12,6 +12,8 @@ class FlashCard(Base):
     tags = Column(String(500), nullable=True)
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
     categories = relationship("Category")
+    front_lang = Column(String(10), nullable=True)
+    back_lang = Column(String(10), nullable=True)
     last_practiced = Column(DateTime)
     creation_at = Column(
         DateTime, nullable=False, default=datetime.datetime.now(datetime.timezone.utc)
