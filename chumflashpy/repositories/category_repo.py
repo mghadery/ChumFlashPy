@@ -27,6 +27,14 @@ class CategoryRepo:
         category.id = None
         self.Session.add(category)
         self.Session.commit()
+        return self.get_by_name(category)
+
+    def get_by_name(self, name):
+        return (
+            self.Session.query(Category)
+            .filter(func.lower(Category.name) == name.lower())
+            .first()
+        )
 
     def get_by_id(self, id):
         try:

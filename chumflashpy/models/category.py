@@ -8,7 +8,7 @@ class Category(Base):
     name = Column(String, nullable=False)
 
     def __repr__(self):
-        return f"<Category(id={self.id}, name={self.name})>"
+        return f"(id={self.id}, name={self.name})"
 
     # def __init__(self, id, name):
     #     self.id = id

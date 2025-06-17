@@ -18,6 +18,7 @@ class FlashCard(Base):
     creation_at = Column(
         DateTime, nullable=False, default=datetime.datetime.now(datetime.timezone.utc)
     )
+    complexity = Column(Integer, nullable=False)
     username = Column(String(100), nullable=False)
 
     # def __init__(
@@ -31,3 +32,6 @@ class FlashCard(Base):
     #     self.last_practiced = last_practiced
     #     self.creation_at = creation_at
     #     self.username = username
+
+    def __str__(self):
+        return f"id: {self.id}\nfront: {self.front}\nback: {self.back}\ntags: {self.tags}\nfront_lang: {self.front_lang}\nback_lang: {self.back_lang}\ncomplexity:{self.complexity}"
